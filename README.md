@@ -13,3 +13,6 @@ Those developing [Library Card Platform for The Wikipedia Library](https://githu
 ```
 vagrant up
 ```
+
+Wait for about 30 seconds after the up completes, then
+point a browser to: [http://localhost:8000](http://localhost:8000)
