@@ -8,6 +8,12 @@ Deploys and configures the [Library Card Platform for The Wikipedia Library](htt
 
 Those developing [Library Card Platform for The Wikipedia Library](https://github.com/WikipediaLibrary/TWLight).
 
+## Requirements
+* Vagrant
+* Virtualbox
+* vagrant-vbguest plugin
+
+
 ## Usage
 
 ```

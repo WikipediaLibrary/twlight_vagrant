@@ -1,5 +1,6 @@
 modules
 imports
+dumps
 
 # Created by https://www.gitignore.io/api/windows,osx,vagrant,django,python,sublimetext,vim,emacs
 
