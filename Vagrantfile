@@ -5,6 +5,8 @@ Vagrant.configure("2") do |config|
     config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
     config.vbguest.auto_update = true
     config.vm.provision "shell",
+      inline: "cp /vagrant/hosts /etc/hosts"
+    config.vm.provision "shell",
       inline: "apt-get install -y puppet vim"
     config.vm.provision "shell",
       inline: "puppet module install --target-dir /vagrant/modules \
@@ -12,6 +14,5 @@ Vagrant.configure("2") do |config|
     config.vm.provision "puppet" do |puppet|
       puppet.module_path = "modules"
     end
-    config.vm.network :forwarded_port, guest: 80, host: 8000
   end
 end
