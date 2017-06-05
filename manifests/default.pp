@@ -1,4 +1,4 @@
-$twlight_git_revision = 'dev-T161889'
+$twlight_git_revision = 'master'
 $twlight_mysqlroot_pw = 'vagrant'
 $twlight_mysqltwlight_pw = 'vagrant'
 $twlight_mysqlimport = '/vagrant/imports/twlight.sql'
