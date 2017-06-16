@@ -7,12 +7,21 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell",
       inline: "cp /vagrant/hosts /etc/hosts"
     config.vm.provision "shell",
+      inline: "mkdir -p /vagrant/modules"
+    config.vm.provision "shell",
+      inline: "mkdir -p /vagrant/imports"
+    config.vm.provision "shell",
+      inline: "mkdir -p /vagrant/dumps"
+    config.vm.provision "shell",
       inline: "apt-get install -y puppet vim"
     config.vm.provision "shell",
       inline: "puppet module install --target-dir /vagrant/modules \
-        jsnshrmn/twlight --version 0.1.5;"
+        jsnshrmn/twlight --version 0.1.9;"
     config.vm.provision "puppet" do |puppet|
       puppet.module_path = "modules"
+    ## Work around issue in puppet module
+    config.vm.provision "shell",
+      inline: "mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -D mysql -u root -pvagrant; systemctl restart mysql && systemctl restart gunicorn"
     end
   end
 end
