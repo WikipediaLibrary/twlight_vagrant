@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
       inline: "apt-get install -y puppet vim"
     config.vm.provision "shell",
       inline: "puppet module install --target-dir /vagrant/modules \
-        jsnshrmn/twlight --version 0.1.9;"
+        jsnshrmn/twlight --version 0.1.10;"
     config.vm.provision "puppet" do |puppet|
       puppet.module_path = "modules"
     ## Work around issue in puppet module
