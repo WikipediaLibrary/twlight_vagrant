@@ -30,3 +30,7 @@ vagrant ssh -- -D 2080
 Wait for about 30 seconds after the up completes, then
 point a browser (configured to use your proxy on 2080 to:
 [http://twlight.vagrant.localdomain](http://twlight.vagrant.localdomain)
+
+## Known issues
+
+Updating to Firefox 55+ recently replaced FoxyProxy Standard 4.x with FoxyProxy Standard 5.x, as 5.x supports the new Firefox extension framework called WebExtensions. Firefox is now replacing any extensions with a newer WebExtensions version if it is available, since WebExtensions will be the only supported extensions framework starting in Firefox 57. As of early September 2017, the new version doesn't support the SOCKS proxy as described in this README, so you may wish to downgrade to 4.x if you find yourself unable to reach your vagrant machine.
