@@ -6,8 +6,8 @@ Vagrant.configure("2") do |config|
 
   # We need a little beef if we're pulling in production-scale data
   config.vm.provider :virtualbox do |v|
-    v.cpus = 2
-    v.memory = 1024
+    v.cpus = 4
+    v.memory = 4096
     v.linked_clone = true
   end
 
@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
     # Install our twlight puppet module
     config.vm.provision "shell",
       inline: "puppet module install --target-dir /vagrant/modules \
-        jsnshrmn/twlight --version 0.1.16;"
+        jsnshrmn/twlight --version 0.1.19;"
 
     # Run the puppet provisioner
     config.vm.provision "puppet" do |puppet|

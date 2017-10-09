@@ -27,8 +27,7 @@ vagrant up
 vagrant ssh -- -D 2080
 
 ```
-Wait for about 30 seconds after the up completes, then
-point a browser (configured to use your proxy on 2080 to:
+Then point a browser (configured to use your proxy on 2080 to:
 [http://twlight.vagrant.localdomain](http://twlight.vagrant.localdomain)
 
 ## Known issues
