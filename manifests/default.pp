@@ -6,7 +6,7 @@ $twlight_mysqldumpdir = '/vagrant/dumps'
 $twlight_servername = 'twlight.vagrant.localdomain'
 $twlight_serverport = '80'
 $twlight_externalport = '80'
-$twlight_environment = 'vagrant'
+$twlight_environment = 'local'
 $twlight_unixname = 'www'
 
 $twlight_secretkey = 'vagrant'
