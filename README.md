@@ -18,6 +18,12 @@ Those developing [Library Card Platform for The Wikipedia Library](https://githu
 I like to use the [FoxyProxy Standard addon for Firefox](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/),
 and match on URL patterns.
 
+If you have a DB dump that you'd like to load on provision, place it
+
+```
+./imports/twlight.sql
+```
+
 ## Usage
 
 Expects you to use an SSH SOCKS proxy. rather than messing around with Vagrant port mapping,
