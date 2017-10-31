@@ -21,12 +21,12 @@ Vagrant.configure("2") do |config|
 
     # Install puppet because we need it, and vim because the author of this Vagrantfile prefers it
     config.vm.provision "shell",
-      inline: "apt-get install -y puppet vim"
+      inline: "apt-get install -y chrony puppet vim"
 
     # Install our twlight puppet module
     config.vm.provision "shell",
       inline: "puppet module install --target-dir /vagrant/modules \
-        jsnshrmn/twlight --version 0.1.23;"
+        jsnshrmn/twlight --version 0.1.25;"
 
     # Run the puppet provisioner
     config.vm.provision "puppet" do |puppet|
@@ -35,6 +35,8 @@ Vagrant.configure("2") do |config|
     ## Work around issue in puppet module
     config.vm.provision "shell",
       inline: "mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -D mysql -u root -pvagrant; systemctl restart mysql && systemctl restart gunicorn"
+    config.vm.provision "shell",
+      inline: "sudo su www bash -c '/var/www/html/TWLight/bin/./virtualenv_migrate.sh >>/var/www/html/TWLight/TWLight/logs/update.log 2>&1' || :"
 
     end
 
