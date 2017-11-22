@@ -26,15 +26,12 @@ Vagrant.configure("2") do |config|
     # Install our twlight puppet module
     config.vm.provision "shell",
       inline: "puppet module install --target-dir /vagrant/modules \
-        jsnshrmn/twlight --version 0.1.25;"
+        jsnshrmn/twlight --version 0.2.2;"
 
     # Run the puppet provisioner
     config.vm.provision "puppet" do |puppet|
       puppet.module_path = "modules"
 
-    ## Work around issue in puppet module
-    config.vm.provision "shell",
-      inline: "mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -D mysql -u root -pvagrant; systemctl restart mysql && systemctl restart gunicorn"
     config.vm.provision "shell",
       inline: "sudo su www bash -c '/var/www/html/TWLight/bin/./virtualenv_migrate.sh >>/var/www/html/TWLight/TWLight/logs/update.log 2>&1' || :"
 
