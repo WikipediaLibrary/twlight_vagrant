@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
     # Install our twlight puppet module
     config.vm.provision "shell",
       inline: "puppet module install --target-dir /vagrant/modules \
-        jsnshrmn/twlight --version 0.2.2;"
+        jsnshrmn/twlight --version 0.2.4;"
 
     # Run the puppet provisioner
     config.vm.provision "puppet" do |puppet|
