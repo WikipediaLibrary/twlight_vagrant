@@ -18,6 +18,8 @@ Those developing [Library Card Platform for The Wikipedia Library](https://githu
 I like to use the [FoxyProxy Standard addon for Firefox](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/),
 and match on URL patterns.
 
+## Notes for Windows users:
+I strongly recommend using Vagrant's (early but generally working) support for Ubuntu on Windows via the Windows Subsystem for Linux. You should be on Windows 10 Version 1709 or later. See the [Vagrant and Windows Subsystem for Linux instructions](https://www.vagrantup.com/docs/other/wsl.html).
 
 ## Usage
 
