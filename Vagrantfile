@@ -1,7 +1,7 @@
 Vagrant.configure("2") do |config|
 
   # roughly tracking twlight vms provisioned via wikimedia labs horizon
-  config.vm.box = "bento/debian-8.9"
+  config.vm.box = "bento/debian-8"
   #config.vm.box_version = ""
 
   # We need a little beef if we're pulling in production-scale data
