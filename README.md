@@ -25,6 +25,8 @@ I strongly recommend using Vagrant's (early but generally working) support for U
 
 ## Usage
 
+Clone this repository, which is where you will be running Vagrant.
+
 If you need to tweak any of the settings for the [puppet module](https://github.com/WikipediaLibrary/twlight_puppet), edit the values in
 ```
 ./manifests/default.pp
@@ -46,6 +48,7 @@ vagrant ssh -- -D 2080
 Then point a browser (configured to use your proxy on 2080 to:
 [http://twlight.vagrant.localdomain](http://twlight.vagrant.localdomain)
 
+You can now work on the running app inside Vagrant and view the changes in your browser.
 As you are making local changes, make sure to take advantage of the included test suite. To do so, run the following command within the vagrant machine:
 
 ```
