@@ -1,6 +1,19 @@
 Vagrant.configure("2") do |config|
 
-  # roughly tracking twlight vms provisioned via wikimedia labs horizon
+  if File.exists?(File.join(Dir.home, ".gitconfig"))
+    # Read local machine's gitconfig (~/.gitconfig)
+    gitconfig = File.read(File.join(Dir.home, ".gitconfig"))
+    # Copy it to VM as the /etc/gitconfig
+    config.vm.provision :shell, :inline => "echo 'Copying local Git config to VM...' && echo '#{gitconfig}' > /etc/gitconfig"
+  #else
+  #  # Else, throw a Vagrant Error. Cannot successfully startup on Windows without a GitHub SSH Key!
+  #  raise Vagrant::Errors::VagrantError, "\n\nERROR: GitHub SSH Key not found at ~/.ssh/github_rsa.\n\n"
+  end
+
+  # Forward SSH agent from host into Vagrant machine
+  config.ssh.forward_agent = true
+
+  # roughly tracking twlight VMs provisioned via wikimedia labs horizon
   config.vm.box = "bento/debian-8"
   #config.vm.box_version = ""
 
@@ -11,7 +24,7 @@ Vagrant.configure("2") do |config|
     v.linked_clone = true
   end
 
-  # Our pupet provisioner expects /vagrant, and virtualbox is the only tested provider
+  # Our puppet provisioner expects /vagrant, and virtualbox is the only tested provider
   if Vagrant.has_plugin?("vagrant-vbguest")
     config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
     config.vbguest.auto_update = true
@@ -26,14 +39,19 @@ Vagrant.configure("2") do |config|
     # Install our twlight puppet module
     config.vm.provision "shell",
       inline: "puppet module install --target-dir /vagrant/modules \
-        jsnshrmn/twlight --version 0.2.6;"
+        jsnshrmn/twlight --version 0.2.7;"
 
     # Run the puppet provisioner
     config.vm.provision "puppet" do |puppet|
       puppet.module_path = "modules"
 
+    # Run migration so any imported DB dump will work with current code.
     config.vm.provision "shell",
       inline: "sudo su www bash -c '/var/www/html/TWLight/bin/./virtualenv_migrate.sh >>/var/www/html/TWLight/TWLight/logs/update.log 2>&1' || :"
+
+    # Allow vagrant user to write to project .git
+    config.vm.provision "shell",
+      inline: "usermod -a -G www vagrant && chmod -R g+w /var/www/html/TWLight/.git"
 
     end
 

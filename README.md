@@ -27,7 +27,7 @@ I strongly recommend using Vagrant's (early but generally working) support for U
 
 Clone this repository, which is where you will be running Vagrant.
 
-If you need to tweak any of the settings for the [puppet module](https://github.com/WikipediaLibrary/twlight_puppet), edit the values in
+You will probably need to tweak some of the settings for the [puppet module](https://github.com/WikipediaLibrary/twlight_puppet); to do so, edit the values in
 ```
 ./manifests/default.pp
 ```
@@ -38,8 +38,8 @@ If you have a DB dump that you'd like to load on provision, place it
 ./imports/twlight.sql
 ```
 
-Expects you to use an SSH SOCKS proxy. rather than messing around with Vagrant port mapping,
-which can have implications for backend apps.
+You'll need to use an SSH SOCKS proxy to access the web interface.
+To do so specify a dynamic tunnel when you vagrant ssh, e.g.
 ```
 vagrant up
 vagrant ssh -- -D 2080
