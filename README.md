@@ -14,8 +14,25 @@ Those developing [Library Card Platform for The Wikipedia Library](https://githu
 * vagrant-vbguest plugin (eg. vagrant plugin install vagrant-vbguest)
 * Browser configured to hit a local SOCKS proxy on a port of your choice, I use 2080
 
-I like to use the [FoxyProxy Standard addon for Firefox](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/),
-and match on URL patterns.
+## Example FoxyProxy Config:
+
+I like to use the [FoxyProxy Standard addon for Firefox](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/) and match on URL patterns.
+Proxy:
+```
+Title:      Vagrant
+Proxy Type: SOCKS5
+Proxy DNS?: On
+IP Address: 127.0.0.1
+Port:       2080
+```
+White Patterns:
+```
+Name:       Vagrant
+Pattern:    *.vagrant.localdomain*
+Type:       wildcard
+http(s):    both
+On/Off:     on
+```
 
 ## Notes for Linux users:
 For a "just works" experience, I recommend fetching Vagrant and Virtualbox packages from the vendor websites rather than using your distribution's software repositories. Those likely include fairly old versions of the required packages, and you will find yourself having to carefully managing your Vagrant, Virtualbox, and base box updates to avoid breakage, if it's not broken out of the gate.
