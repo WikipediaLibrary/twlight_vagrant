@@ -36,6 +36,10 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell",
       inline: "apt-get install -y chrony puppet vim"
 
+    # Add github's host key to our known hosts file
+    config.vm.provision "shell",
+      inline: "ssh-keyscan -t rsa github.com >> /etc/ssh/ssh_known_hosts"
+
     # Install our twlight puppet module
     config.vm.provision "shell",
       inline: "puppet module install --target-dir /vagrant/modules \
