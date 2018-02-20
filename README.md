@@ -74,7 +74,7 @@ sudo su www /var/www/html/TWLight/bin/virtualenv_test.sh
 
 ## Editing guest files from host (Advanced)
 
-If you prefer to work from the host environment, you can use any editing tools that support SSH. You'll still need to run helper scripts, restart services, and commit code to git as usual. You can get the ssh connection information by running vagrant ssh-config, e.g.
+If you prefer to work from the host environment, you can use any editing tools that support SSH. You'll still need to run helper scripts, restart services, and commit changes as usual. You can get the ssh connection information by running vagrant ssh-config, e.g.
 
 ```
 $ vagrant ssh-config
@@ -94,7 +94,13 @@ Where ??? is your linux username
 
 ### Notes for Windows users:
 
-You will need to modify the IdentityFile path above in order to access the private key from a Windows application. You should never modify Windows Subsystem for Linux files outside of the linux environment, but allowing your application to read the SSH key should be safe. The WSL home directory is %localappdata%\Lxss\home\???, where ??? is your linux username, e.g.
+You will need to modify the IdentityFile path above in order to access the private key from a Windows application. You should never modify Windows Subsystem for Linux files outside of the linux environment, but allowing your application to read the SSH key should be safe. The WSL home directory is:
+
+```
+%localappdata%\Lxss\home\???
+```
+
+where ??? is your linux username, e.g. the full path to your TWLight Vagrant machine's IdentityFile would be something like:
 
 ```
 %localappdata%\Lxss\home\???\Projects\vagrant\twlight_vagrant\.vagrant\machines\default\virtualbox\private_key
