@@ -55,7 +55,7 @@ Vagrant.configure("2") do |config|
 
     # Allow vagrant user to write to project .git
     config.vm.provision "shell",
-      inline: "usermod -a -G www vagrant && chmod -R g+w /var/www/html/TWLight/.git"
+      inline: "usermod -a -G www vagrant && chmod -R g+w /var/www/html/TWLight"
 
     end
 

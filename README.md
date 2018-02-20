@@ -71,3 +71,64 @@ As you are making local changes, make sure to take advantage of the included tes
 ```
 sudo su www /var/www/html/TWLight/bin/virtualenv_test.sh
 ```
+
+## Editing guest files from host (Advanced)
+
+If you prefer to work from the host environment, you can use any editing tools that support SSH. You'll still need to run helper scripts, restart services, and commit code to git as usual. You can get the ssh connection information by running vagrant ssh-config, e.g.
+
+```
+$ vagrant ssh-config
+Host default
+  HostName 127.0.0.1
+  User vagrant
+  Port 2222
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /home/???/Projects/vagrant/twlight_vagrant/.vagrant/machines/default/virtualbox/private_key
+  IdentitiesOnly yes
+  LogLevel FATAL
+  ForwardAgent yes
+```
+Where ??? is your linux username
+
+### Notes for Windows users:
+
+You will need to modify the IdentityFile path above in order to access the private key from a Windows application. You should never modify Windows Subsystem for Linux files outside of the linux environment, but allowing your application to read the SSH key should be safe. The WSL home directory is %localappdata%\Lxss\home\???, where ??? is your linux username, e.g.
+
+```
+%localappdata%\Lxss\home\???\Projects\vagrant\twlight_vagrant\.vagrant\machines\default\virtualbox\private_key
+```
+
+### Notepad++ example
+
+#### Install the NppFTP Plugin
+
+1. Under Plugins -> Plugin Manager, Select "Show Plugin Manager"
+2. Under Settings, Select "Show unstable plugins" and click OK
+3. Attempt to install the NppFTP plugin.
+4. You will be prompted to update the plugin manager before proceeding with the NppFTP installation. Allow the update, but when asked if you would like to automatically restart, select "No", then manually exit.
+5. Open Notepad++ again and install the NppFTP plugin.
+6. Under Plugins -> NppFTP, select "Show NppFTP Window"
+
+#### Create a profile to connect to your TWLight Vagrant machine in the NppFTP window
+
+1. Under the Settings gear, Select "Profile settings"
+2. Click "Add new"
+3. Give the profile a creative name, such as "twlight_vagrant" and click OK
+4. Set the following values:
+
+```
+Connection:
+  Hostname: vagrant ssh-config HostName
+  Connection type: SFTP
+  Port: vagrant ssh-config port
+  Username: vagrant
+  Initial remote directory: /var/www/html/TWLight
+Authentication:
+  Try private key file authentication: Checked
+  Try password authentication: Unchecked
+  Private key file: vagrant ssh-config IdentityFile (Windows users modify path as noted)
+```
+
+You may now use the (Dis)Connect icon in the NppFTP window to browser and edit files in the guest, as well as drag and drop files from your host system into the guest.
