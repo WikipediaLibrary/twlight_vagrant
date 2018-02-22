@@ -14,6 +14,9 @@ Those developing [Library Card Platform for The Wikipedia Library](https://githu
 * vagrant-vbguest plugin (eg. vagrant plugin install vagrant-vbguest)
 * Browser configured to hit a local SOCKS proxy on a port of your choice, I use 2080
 
+## Optional
+* Host-side editing tools that can operate over SSH
+
 ## Example FoxyProxy Config:
 
 I like to use the [FoxyProxy Standard addon for Firefox](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/) and match on URL patterns.
@@ -106,7 +109,42 @@ where ??? is your linux username, e.g. the full path to your TWLight Vagrant mac
 %localappdata%\Lxss\home\???\Projects\vagrant\twlight_vagrant\.vagrant\machines\default\virtualbox\private_key
 ```
 
-### Notepad++ example
+### Cyberduck example (MacOS or Windows)
+
+[Cyberduck](https://cyberduck.io/) is a general-purpose cloud and server storage browser that can work with pretty much any host-side application.
+
+#### Set relevant preferences in Cyberduck
+
+1. Under Edit, select "Preferences"
+2. Under General, set "Default protocol" to "SFTP (SSH File Transfer Protocol)"
+3. Under Editor, set the default text editor to the application of your choice
+
+#### Create a connection to your TWLight Vagrant machine and bookmark it
+
+1. Click "Open Connection"
+2. Expand the "More Options" section.
+3. Set the following values:
+
+```
+Protocol: SFTP (SSH File Transfer Protocol)
+Server: vagrant ssh-config HostName
+Port: vagrant ssh-config port
+Username: vagrant
+SSH Private Key: vagrant ssh-config IdentityFile (Windows users modify path as noted)
+Save Password: Unchecked
+Path: /var/www/html/TWLight
+```
+
+4. Click "Connect"
+5. Under Bookmark, Select "New Bookmark"
+3. Give the bookmark a creative name, such as "twlight_vagrant" and close the window
+4. You can now toggle bookmarks under the Bookmark menu
+
+You may now use your bookmarked connection to browse and edit files in the guest, as well as drag and drop files from your host system into the guest.
+
+### Notepad++ example (Windows only)
+
+[Notepad++](https://notepad-plus-plus.org/) is a Windows-only text/code editor with a rich plugin ecosystem. You can configure it to directly edit files via SSH by using an unstable plugin.
 
 #### Install the NppFTP Plugin
 
@@ -137,4 +175,4 @@ Authentication:
   Private key file: vagrant ssh-config IdentityFile (Windows users modify path as noted)
 ```
 
-You may now use the (Dis)Connect icon in the NppFTP window to browser and edit files in the guest, as well as drag and drop files from your host system into the guest.
+You may now use the (Dis)Connect icon in the NppFTP window to browse and edit files in the guest, as well as drag and drop files from your host system into the guest.
