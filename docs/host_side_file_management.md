@@ -34,6 +34,8 @@ where $username is your linux username, e.g. the full path to your TWLight Vagra
 
 ## FileZilla example (Linux, MacOS, or Windows)
 
+[FileZilla](https://filezilla-project.org/) is a multiplatform FTP, FTPS, and SFTP client that can work with pretty much any host-side application.
+
 1. Under File, select "Site Manager"
 2. Click "New Site"
 3. Give the site a creative name, such as "twlight_vagrant" and click OK
