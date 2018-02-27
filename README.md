@@ -24,7 +24,15 @@ For a "just works" experience, I recommend fetching Vagrant and Virtualbox packa
 
 ## Notes for Windows users:
 
-I strongly recommend using Vagrant's (early but generally working) support for Ubuntu on Windows via the Windows Subsystem for Linux. You should be on Windows 10 Version 1709 or later and perform a store-based Ubuntu installation. See the [Vagrant and Windows Subsystem for Linux instructions](https://www.vagrantup.com/docs/other/wsl.html). You'll install Virtualbox on the Windows side, and then install exactly the same build of Vagrant in both Windows and Ubuntu on Windows. The Linux notes apply to the Ubuntu on Windows environment. Just download a fixed version of Vagrant (that matches the version you install in Windows) and install using dpkg as described in the instructions. Install any plugins in Ubuntu.
+You'll need to add the following directory to your PATH environment variable after installing Virtualbox:
+
+```
+C:\Program Files\Oracle\VirtualBox
+```
+
+See [https://msdn.microsoft.com/en-us/library/office/ee537574(v=office.14).aspx](this example from Microsoft) for adding a path to the PATH environment variable.
+
+Vagrant's (early but generally working) support for Ubuntu via the Windows Subsystem for Linux is the recommended way to run this enviroment. You should be on Windows 10 Version 1709 or later and perform a store-based Ubuntu installation. See the [Vagrant and Windows Subsystem for Linux instructions](https://www.vagrantup.com/docs/other/wsl.html). You'll install Virtualbox on the Windows side, and then install exactly the same build of Vagrant in both Windows and Ubuntu. The Linux notes apply to the Ubuntu environment. Just download a fixed version of Vagrant (that matches the version you install in Windows) and install using dpkg as described in the instructions. Install any plugins in Ubuntu.
 
 On Vagrant 2.0.2 and earlier, [issue #9298](https://github.com/hashicorp/vagrant/issues/9298) means you'll need create a symlink in the location of the deprecated lxrun installation that points to the new store-based installation. As pointed out in the reported issue, running the following powershell commands on the windows side will pull the information from the registry and create the appropriate symlink.
 
