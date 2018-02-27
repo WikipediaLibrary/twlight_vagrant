@@ -20,16 +20,36 @@ Where $username is your linux username
 
 ## Notes for Windows users:
 
-You will need to modify the IdentityFile path above in order to access the private key from a Windows application. You should never modify Windows Subsystem for Linux files outside of the linux environment, but allowing your application to read the SSH key should be safe. The WSL home directory is:
+You will need to modify the IdentityFile path above in order to access the private key from a Windows application. Modifying Windows Subsystem for Linux files outside of the linux environment will break your linux environment, but allowing your application to read the SSH key should be safe. The location of your home directory differs between store-based installs (recommended, what you probably have) and lxrun-based installs (deprecated). All references here will be for the store-based install. If you are still using an lxrun-based install, you can install Ubuntu from the store and run it alongside your deprecated install.
+
+The store-based Ubuntu home directory is:
 
 ```
-%localappdata%\Lxss\home\$username
+%localappdata%\Packages\CanonicalGroupLimited.UbuntuonWindows_$somevalue\LocalState\rootfs\home\$username
 ```
 
-where $username is your linux username, e.g. the full path to your TWLight Vagrant machine's IdentityFile would be something like:
+where $username is your linux username and $somevalue is not consistent across installations. You can get $somevalue by browsing to:
 
 ```
-%localappdata%\Lxss\home\$username\Projects\vagrant\twlight_vagrant\.vagrant\machines\default\virtualbox\private_key
+%localappdata%\Packages
+```
+
+and navigating to the folder that begins with
+
+```
+CanonicalGroupLimited.UbuntuonWindows_
+```
+
+and then navigating down to:
+
+```
+LocalState\rootfs\home\$username
+```
+
+The full path to your TWLight Vagrant machine's IdentityFile would be something like:
+
+```
+%localappdata%\Packages\CanonicalGroupLimited.UbuntuonWindows_$somevalue\LocalState\rootfs\home\$username\Projects\vagrant\twlight_vagrant\.vagrant\machines\default\virtualbox\private_key
 ```
 
 ## FileZilla example (Linux, MacOS, or Windows)
