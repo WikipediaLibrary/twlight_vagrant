@@ -28,7 +28,7 @@ The store-based Ubuntu home directory is:
 %localappdata%\Packages\CanonicalGroupLimited.UbuntuonWindows_$somevalue\LocalState\rootfs\home\$USER
 ```
 
-where $USER is your linux username and $somevalue is not consistent across installations. For convenience, you may run [bin/get_winpath_for_wsl_homedir.sh](bin/get_winpath_for_wsl_homedir.sh) from the twlight_vagrant directory in Ubuntu, which will print the windows path to your Ubuntu home directory:
+where $USER is your linux username and $somevalue is not consistent across installations. For convenience, you may run [bin/get_winpath_for_wsl_homedir.sh](../bin/get_winpath_for_wsl_homedir.sh) from the twlight_vagrant directory in Ubuntu, which will print the windows path to your Ubuntu home directory:
 
 
 ```
