@@ -20,7 +20,7 @@ Where $username is your linux username
 
 ## Notes for Windows users:
 
-You will need to modify the IdentityFile path above in order to access the private key from a Windows application. Modifying Windows Subsystem for Linux files outside of the linux environment will break your linux environment, but allowing your application to read the SSH key should be safe. The location of your home directory differs between store-based installs (recommended, what you probably have) and lxrun-based installs (deprecated). All references here will be for the store-based install. If you are still using an lxrun-based install, you can install Ubuntu from the store and run it alongside your deprecated install.
+You will need to modify the IdentityFile path above in order to access the private key from a Windows application. Modifying Windows Subsystem for Linux files outside of the linux environment will break your linux environment, but allowing your application to read the SSH key should be safe. The location of your home directory differs between store-based installs (recommended, what you probably have) and lxrun-based installs (deprecated). All references here will be for the store-based install.
 
 The store-based Ubuntu home directory is:
 
