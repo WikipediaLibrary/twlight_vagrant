@@ -32,7 +32,7 @@ You'll need to add the following directory to your PATH environment variable aft
 C:\Program Files\Oracle\VirtualBox
 ```
 
-See [https://msdn.microsoft.com/en-us/library/office/ee537574(v=office.14).aspx](this example from Microsoft) for adding a path to the PATH environment variable.
+See [https://msdn.microsoft.com/en-us/library/office/ee537574%28v=office.14%29.aspx](this example from Microsoft) for adding a path to the PATH environment variable.
 
 Vagrant's (early but generally working) support for Ubuntu via the Windows Subsystem for Linux is the recommended way to run this enviroment. You should be on Windows 10 Version 1709 or later and perform a store-based Ubuntu installation. See the [Vagrant and Windows Subsystem for Linux instructions](https://www.vagrantup.com/docs/other/wsl.html). You'll install VirtualBox on the Windows side, and then install exactly the same build of Vagrant in both Windows and Ubuntu. The Linux notes apply to the Ubuntu environment. Just download a fixed version of Vagrant (that matches the version you install in Windows) and install using dpkg as described in the instructions. Install any plugins in Ubuntu.
 
