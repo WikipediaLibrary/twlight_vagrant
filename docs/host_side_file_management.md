@@ -11,45 +11,40 @@ Host default
   UserKnownHostsFile /dev/null
   StrictHostKeyChecking no
   PasswordAuthentication no
-  IdentityFile /home/$username/Projects/vagrant/twlight_vagrant/.vagrant/machines/default/virtualbox/private_key
+  IdentityFile /home/$USER/Projects/vagrant/twlight_vagrant/.vagrant/machines/default/virtualbox/private_key
   IdentitiesOnly yes
   LogLevel FATAL
   ForwardAgent yes
 ```
-Where $username is your linux username
+Where $USER is your linux username
 
 ## Notes for Windows users:
 
-You will need to modify the IdentityFile path above in order to access the private key from a Windows application. Modifying Windows Subsystem for Linux files outside of the linux environment will break your linux environment, but allowing your application to read the SSH key should be safe. The location of your home directory differs between store-based installs (recommended, what you probably have) and lxrun-based installs (deprecated). All references here will be for the store-based install.
+You will need to modify the IdentityFile path above in order to access the private key from a Windows application. Modifying Windows Subsystem for Linux files outside of the linux environment will break your linux environment, but allowing your application to read the SSH key should be safe. The location of your home directory differs between store-based installs (recommended, what you probably have) and lxrun-based installs (deprecated). All references here will be for the store-based Ubuntu install.
 
 The store-based Ubuntu home directory is:
 
 ```
-%localappdata%\Packages\CanonicalGroupLimited.UbuntuonWindows_$somevalue\LocalState\rootfs\home\$username
+%localappdata%\Packages\CanonicalGroupLimited.UbuntuonWindows_$somevalue\LocalState\rootfs\home\$USER
 ```
 
-where $username is your linux username and $somevalue is not consistent across installations. You can get $somevalue by browsing to:
+where $USER is your linux username and $somevalue is not consistent across installations. For convenience, you may run [bin/get_winpath_for_wsl_homedir.sh](bin/get_winpath_for_wsl_homedir.sh) from the twlight_vagrant directory in Ubuntu, which will print the windows path to your Ubuntu home directory:
+
 
 ```
-%localappdata%\Packages
+./bin/get_winpath_for_wsl_homedir.sh
 ```
 
-and navigating to the folder that begins with
+To that path, add the path to the private key for the TWLight Vagrant machine that gets created upon "vagrant up." For example
 
 ```
-CanonicalGroupLimited.UbuntuonWindows_
+Projects\vagrant\twlight_vagrant\.vagrant\machines\default\virtualbox\private_key
 ```
 
-and then navigating down to:
+In this case, the full path to your TWLight Vagrant machine's IdentityFile would be something like:
 
 ```
-LocalState\rootfs\home\$username
-```
-
-The full path to your TWLight Vagrant machine's IdentityFile would be something like:
-
-```
-%localappdata%\Packages\CanonicalGroupLimited.UbuntuonWindows_$somevalue\LocalState\rootfs\home\$username\Projects\vagrant\twlight_vagrant\.vagrant\machines\default\virtualbox\private_key
+%localappdata%\Packages\CanonicalGroupLimited.UbuntuonWindows_$somevalue\LocalState\rootfs\home\$USER\Projects\vagrant\twlight_vagrant\.vagrant\machines\default\virtualbox\private_key
 ```
 
 ## FileZilla example (Linux, MacOS, or Windows)
