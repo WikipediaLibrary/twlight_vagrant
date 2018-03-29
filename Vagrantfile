@@ -26,8 +26,8 @@ Vagrant.configure("2") do |config|
 
   # Our puppet provisioner expects /vagrant, and virtualbox is the only tested provider
   if Vagrant.has_plugin?("vagrant-vbguest")
-    config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
-    config.vbguest.auto_update = true
+    config.vm.synced_folder ".", "/vagrant", type: "virtualbox", mount_options: ['dmode=777', 'fmode=666']
+    config.vbguest.auto_update = false
     # dump our static hosts file in
     config.vm.provision "shell",
       inline: "cp /vagrant/hosts /etc/hosts"
@@ -40,10 +40,20 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell",
       inline: "ssh-keyscan -t rsa github.com >> /etc/ssh/ssh_known_hosts"
 
+    # Handy method for fetching puppet module from github
+    config.vm.provision "shell",
+      inline: "wget --quiet --timestamping --directory-prefix=/vagrant/modules \
+			  'https://github.com/WikipediaLibrary/twlight_puppet/archive/0.2.10.tar.gz'"
+
     # Install our twlight puppet module
     config.vm.provision "shell",
       inline: "puppet module install --target-dir /vagrant/modules \
-        jsnshrmn/twlight --version 0.2.7;"
+        /vagrant/modules/0.2.10.tar.gz"
+
+    # Install our twlight puppet module
+#    config.vm.provision "shell",
+#      inline: "puppet module install --target-dir /vagrant/modules \
+#        jsnshrmn/twlight --version 0.2.10;"
 
     # Run the puppet provisioner
     config.vm.provision "puppet" do |puppet|
