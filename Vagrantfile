@@ -40,20 +40,20 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell",
       inline: "ssh-keyscan -t rsa github.com >> /etc/ssh/ssh_known_hosts"
 
-    # Handy method for fetching puppet module from github
+    ## Handy method for fetching puppet module from github
     #config.vm.provision "shell",
     #  inline: "wget --quiet --timestamping --directory-prefix=/vagrant/modules \
-		#	  'https://github.com/WikipediaLibrary/twlight_puppet/archive/0.2.10.tar.gz'"
+		#	  'https://github.com/WikipediaLibrary/twlight_puppet/archive/0.2.11.tar.gz'"
 
     ## Install our twlight puppet module
     #config.vm.provision "shell",
     #  inline: "puppet module install --target-dir /vagrant/modules \
-    #    /vagrant/modules/0.2.10.tar.gz"
+    #    /vagrant/modules/0.2.11.tar.gz"
 
     # Install our twlight puppet module
     config.vm.provision "shell",
       inline: "puppet module install --target-dir /vagrant/modules \
-        jsnshrmn/twlight --version 0.2.10;"
+        jsnshrmn/twlight --version 0.2.11;"
 
     # Run the puppet provisioner
     config.vm.provision "puppet" do |puppet|
