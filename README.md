@@ -54,10 +54,10 @@ You will probably need to tweak some of the settings for the [puppet module](htt
 ./manifests/default.pp
 ```
 
-If you have a DB dump that you'd like to load on provision, place it
+If you have a tarball that you'd like to load on provision, place it
 
 ```
-./imports/twlight.sql
+./backup/twlight.tar.gz
 ```
 
 You'll need to use an SSH SOCKS proxy to access the web interface.
