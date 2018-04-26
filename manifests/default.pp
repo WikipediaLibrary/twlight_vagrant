@@ -3,7 +3,7 @@
 # To be able to push directly from within Vagrant, use the SSH URI instead of
 # HTTPS and make sure your have your SSH key for git added to your key agent.
 # You should definitely not try to do that against master.
-$twlight_git_repository ='git@github.com:WikipediaLibrary/TWLight.git'
+$twlight_git_repository ='https://github.com/WikipediaLibrary/TWLight.git'
 $twlight_git_revision = 'master'
 
 # The Oauth configuration required to make signin to the site work as expected.
