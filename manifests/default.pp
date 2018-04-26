@@ -24,6 +24,13 @@ $twlight_serverport = '80'
 $twlight_externalport = '80'
 $twlight_environment = 'local'
 $twlight_unixname = 'www'
+$twlight_mysql_override_options = {
+  'mysqld' => {
+    'innodb_file_per_table' => '1',
+    'innodb_large_prefix' => '1',
+    'innodb_file_format' => 'Barracuda',
+  }
+}
 
 # These variables set config values for the app.
 # If you don't know what they are then you don't need to change them.

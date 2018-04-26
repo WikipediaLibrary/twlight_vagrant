@@ -1,3 +1,8 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+twlight_puppet_version = "0.2.13"
+
 Vagrant.configure("2") do |config|
 
   if File.exists?(File.join(Dir.home, ".gitconfig"))
@@ -43,17 +48,17 @@ Vagrant.configure("2") do |config|
     ## Handy method for fetching puppet module from github
     #config.vm.provision "shell",
     #  inline: "wget --quiet --timestamping --directory-prefix=/vagrant/modules \
-		#	  'https://github.com/WikipediaLibrary/twlight_puppet/archive/0.2.11.tar.gz'"
+		#	  'https://github.com/WikipediaLibrary/twlight_puppet/archive/"+ twlight_puppet_version +".tar.gz'"
 
     ## Install our twlight puppet module
     #config.vm.provision "shell",
     #  inline: "puppet module install --target-dir /vagrant/modules \
-    #    /vagrant/modules/0.2.11.tar.gz"
+    #    /vagrant/modules/"+ twlight_puppet_version +".tar.gz"
 
     # Install our twlight puppet module
     config.vm.provision "shell",
       inline: "puppet module install --target-dir /vagrant/modules \
-        jsnshrmn/twlight --version 0.2.11;"
+        jsnshrmn/twlight --version "+ twlight_puppet_version +";"
 
     # Run the puppet provisioner
     config.vm.provision "puppet" do |puppet|
