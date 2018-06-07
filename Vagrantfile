@@ -5,6 +5,10 @@ twlight_puppet_version = "0.2.13"
 
 Vagrant.configure("2") do |config|
 
+  # Name this thing
+  config.vm.define "twlight"
+  config.vm.hostname = "twlight.vagrant.localdomain"
+
   if File.exists?(File.join(Dir.home, ".gitconfig"))
     # Read local machine's gitconfig (~/.gitconfig)
     gitconfig = File.read(File.join(Dir.home, ".gitconfig"))
@@ -33,13 +37,15 @@ Vagrant.configure("2") do |config|
   if Vagrant.has_plugin?("vagrant-vbguest")
     config.vm.synced_folder ".", "/vagrant", type: "virtualbox", mount_options: ['dmode=777', 'fmode=666']
     config.vbguest.auto_update = false
-    # dump our static hosts file in
-    config.vm.provision "shell",
-      inline: "cp /vagrant/hosts /etc/hosts"
 
-    # Install puppet because we need it, and vim because the author of this Vagrantfile prefers it
+    # Install puppet because we need it, chrony because its useful in Vagrant,
+    # and vim because the author of this Vagrantfile prefers it.
     config.vm.provision "shell",
-      inline: "apt-get install -y chrony puppet vim"
+      inline: "wget --quiet --timestamping --directory-prefix=/tmp \
+          https://apt.puppetlabs.com/puppetlabs-release-pc1-jessie.deb && \
+          dpkg -i /tmp/puppetlabs-release-pc1-jessie.deb && \
+          apt update && apt install -y chrony puppet-agent vim"
+
 
     # Add github's host key to our known hosts file
     config.vm.provision "shell",
@@ -57,12 +63,17 @@ Vagrant.configure("2") do |config|
 
     # Install our twlight puppet module
     config.vm.provision "shell",
-      inline: "puppet module install --target-dir /vagrant/modules \
+      inline: "puppet module install --target-dir /vagrant/puppet/modules \
         jsnshrmn/twlight --version "+ twlight_puppet_version +";"
 
     # Run the puppet provisioner
     config.vm.provision "puppet" do |puppet|
-      puppet.module_path = "modules"
+      puppet.working_directory = "/vagrant/puppet"
+      puppet.hiera_config_path = "puppet/hiera.yaml"
+      puppet.environment = "local"
+      puppet.environment_path = "puppet/environments"
+      puppet.module_path = "puppet/modules"
+      puppet.binary_path = "/opt/puppetlabs/puppet/bin"
 
     # Run migration so any imported DB dump will work with current code.
     config.vm.provision "shell",
