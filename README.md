@@ -49,10 +49,18 @@ New-Item -ItemType Junction -Path "$env:LOCALAPPDATA\lxss" -Value "$WSLFSPATH\ro
 
 Clone this repository, which is where you will be running Vagrant.
 
-You will probably need to tweak some of the settings for the [puppet module](https://github.com/WikipediaLibrary/twlight_puppet); to do so, edit the values in
+You will probably need to tweak some of the settings for the [puppet module](https://github.com/WikipediaLibrary/twlight_puppet); to do so, create the following yaml file:
 ```
-./manifests/default.pp
+./puppet/data/nodes/twlight.vagrant.localdomain.yaml
 ```
+and make sure it contains at least the following (note the three dashes in the first line):
+```
+---
+# The Oauth configuration required to make signin to the site work as expected.
+twlight::params::oauth_key: 'a valid key given to you by a project member'
+twlight::params::oauth_secret: 'a valid secret given to you by a project member'
+```
+along with any other parameters you'd like to override, such as the git repository or revision.
 
 If you have a tarball that you'd like to load on provision, place it
 

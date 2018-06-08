@@ -1,7 +1,13 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-twlight_puppet_version = "0.2.13"
+#twlight_puppet_version = "0.3.1"
+twlight_puppet_version = "master"
+
+# Put "--debug " in this string if you want to test the limits of your terminal
+# emulator's buffer.
+twlight_puppet_options = "--confdir /vagrant/puppet --codedir /vagrant/puppet"
+twlight_puppet_bin_path = "/opt/puppetlabs/puppet/bin"
 
 Vagrant.configure("2") do |config|
 
@@ -52,28 +58,31 @@ Vagrant.configure("2") do |config|
       inline: "ssh-keyscan -t rsa github.com >> /etc/ssh/ssh_known_hosts"
 
     ## Handy method for fetching puppet module from github
-    #config.vm.provision "shell",
-    #  inline: "wget --quiet --timestamping --directory-prefix=/vagrant/modules \
-		#	  'https://github.com/WikipediaLibrary/twlight_puppet/archive/"+ twlight_puppet_version +".tar.gz'"
+    config.vm.provision "shell",
+      inline: "wget --quiet --timestamping --directory-prefix=/vagrant/puppet/modules \
+			  'https://github.com/WikipediaLibrary/twlight_puppet/archive/"+ twlight_puppet_version +".tar.gz'"
 
     ## Install our twlight puppet module
-    #config.vm.provision "shell",
-    #  inline: "puppet module install --target-dir /vagrant/modules \
-    #    /vagrant/modules/"+ twlight_puppet_version +".tar.gz"
+    config.vm.provision "shell",
+      inline: twlight_puppet_bin_path +"/puppet module install \
+        "+ twlight_puppet_options +" --target-dir /vagrant/puppet/modules \
+        /vagrant/puppet/modules/"+ twlight_puppet_version +".tar.gz"
 
     # Install our twlight puppet module
-    config.vm.provision "shell",
-      inline: "puppet module install --target-dir /vagrant/puppet/modules \
-        jsnshrmn/twlight --version "+ twlight_puppet_version +";"
+    #config.vm.provision "shell",
+    #  inline: twlight_puppet_bin_path +"/puppet module install \
+    #    "+ twlight_puppet_options +" --target-dir /vagrant/puppet/modules \
+    #    jsnshrmn/twlight --version "+ twlight_puppet_version +";"
 
     # Run the puppet provisioner
     config.vm.provision "puppet" do |puppet|
       puppet.working_directory = "/vagrant/puppet"
       puppet.hiera_config_path = "puppet/hiera.yaml"
-      puppet.environment = "local"
+      puppet.environment = "local" # Obviously a lie, but couldn't get the whole puppet stack to believe otherwise
       puppet.environment_path = "puppet/environments"
       puppet.module_path = "puppet/modules"
-      puppet.binary_path = "/opt/puppetlabs/puppet/bin"
+      puppet.binary_path = twlight_puppet_bin_path
+      puppet.options = twlight_puppet_options
 
     # Run migration so any imported DB dump will work with current code.
     config.vm.provision "shell",
