@@ -1,52 +1,21 @@
 ---
-# The remote git repository that Vagrant will fetch TWLight from.
-# Update this to your fork or branch as needed for development.
-# To be able to push directly from within Vagrant, use the SSH URI instead of
-# HTTPS and make sure your have your SSH key for git added to your key agent.
-# You should definitely not try to do that against master.
-twlight::twlight_git_repository: 'https://github.com/WikipediaLibrary/TWLight.git'
-twlight::twlight_git_revision: 'master'
-
 # These variables set config values for OS and package configuration as well as
 # the app. If you don't know what they are then you don't need to change them.
-twlight::twlight_root_dir: '/var/www/html/TWLight'
-twlight::twlight_mysqlroot_pw: 'vagrant'
-twlight::twlight_mysqltwlight_pw: 'vagrant'
-twlight::twlight_restore_file: '/vagrant/backup/twlight.tar.gz'
-twlight::twlight_backup_dir: '/vagrant/backup'
-twlight::twlight_mysqldump_dir: '/var/www/html/TWLight'
-twlight::twlight_servername: 'twlight.vagrant.localdomain'
-twlight::twlight_serverport: '80'
-twlight::twlight_externalport: '80'
-twlight::twlight_environment: 'local'
-twlight::twlight_unixname: 'www'
-# innodb_log_file_size: 128M
-# have to change the socket location due to a bug in mariadb_config
-twlight::twlight_mysql_override_options:
-  'client':
-    'socket': '/tmp/mysql.sock',
-    'default-character-set': 'utf8mb4',
-  'mysqld':
-    'socket': '/tmp/mysql.sock',
-    'innodb_file_per_table': '1',
-    'innodb_large_prefix': '1',
-    'innodb_file_format': 'Barracuda',
-    'innodb_default_row_format': 'DYNAMIC',
-    'innodb_compression_default': '1',
-    'innodb_page_size': '64k',
-    'collation-server': 'utf8mb4_unicode_ci',
-    'init-connect': 'SET NAMES utf8mb4',
-    'character-set-server': 'utf8mb4',
-  'mysqld_safe':
-    'socket': '/tmp/mysql.sock',
-    'default-character-set': 'utf8mb4',
+twlight::params::mysqlroot_pw: 'vagrant'
+twlight::params::mysqltwlight_pw: 'vagrant'
+twlight::params::restore_file: '/vagrant/backup/twlight.tar.gz'
+twlight::params::backup_dir: '/vagrant/backup'
+twlight::params::servername: 'twlight.vagrant.localdomain'
+twlight::params::serverport: '80'
+twlight::params::externalport: '80'
+twlight::params::environment: 'local'
 
 # These variables set config values for the app.
 # If you don't know what they are then you don't need to change them.
-twlight::twlight_secretkey: 'vagrant'
-twlight::twlight_allowedhosts: "['twlight.vagrant.localdomain']"
-twlight::twlight_baseurl: "http://${twlight_servername}/"
-twlight::twlight_oauth_provider_url: "https://meta.wikimedia.org/w/index.php"
+twlight::params::secretkey: 'vagrant'
+twlight::params::allowedhosts: "['twlight.vagrant.localdomain']"
+twlight::params::baseurl: "http://${servername}/"
+twlight::params::oauth_provider_url: "https://meta.wikimedia.org/w/index.php"
 
 classes:
   - twlight
