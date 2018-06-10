@@ -1,0 +1,21 @@
+---
+# These variables set config values for OS and package configuration as well as
+# the app. If you don't know what they are then you don't need to change them.
+twlight::params::mysqlroot_pw: 'vagrant'
+twlight::params::mysqltwlight_pw: 'vagrant'
+twlight::params::restore_file: '/vagrant/backup/twlight.tar.gz'
+twlight::params::backup_dir: '/vagrant/backup'
+twlight::params::servername: 'twlight.vagrant.localdomain'
+twlight::params::serverport: '80'
+twlight::params::externalport: '80'
+twlight::params::environment: 'local'
+
+# These variables set config values for the app.
+# If you don't know what they are then you don't need to change them.
+twlight::params::secretkey: 'vagrant'
+twlight::params::allowedhosts: "['twlight.vagrant.localdomain']"
+twlight::params::baseurl: "http://${servername}/"
+twlight::params::oauth_provider_url: "https://meta.wikimedia.org/w/index.php"
+
+classes:
+  - twlight
