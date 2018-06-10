@@ -1,8 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-#twlight_puppet_version = "0.3.1"
-twlight_puppet_version = "master"
+twlight_puppet_version = "0.3.2"
+#twlight_puppet_version = "master"
 
 # Put "--debug " in this string if you want to test the limits of your terminal
 # emulator's buffer.
@@ -58,27 +58,27 @@ Vagrant.configure("2") do |config|
       inline: "ssh-keyscan -t rsa github.com >> /etc/ssh/ssh_known_hosts"
 
     ## Handy method for fetching puppet module from github
-    config.vm.provision "shell",
-      inline: "wget --quiet --timestamping --directory-prefix=/vagrant/puppet/modules \
-			  'https://github.com/WikipediaLibrary/twlight_puppet/archive/"+ twlight_puppet_version +".tar.gz'"
+    #config.vm.provision "shell",
+    #  inline: "wget --quiet --timestamping --directory-prefix=/vagrant/puppet/modules \
+	#		  'https://github.com/WikipediaLibrary/twlight_puppet/archive/"+ twlight_puppet_version +".tar.gz'"
 
-    ## Install our twlight puppet module
-    config.vm.provision "shell",
-      inline: twlight_puppet_bin_path +"/puppet module install \
-        "+ twlight_puppet_options +" --target-dir /vagrant/puppet/modules \
-        /vagrant/puppet/modules/"+ twlight_puppet_version +".tar.gz"
-
-    # Install our twlight puppet module
+    ## Install our twlight puppet module from github
     #config.vm.provision "shell",
     #  inline: twlight_puppet_bin_path +"/puppet module install \
     #    "+ twlight_puppet_options +" --target-dir /vagrant/puppet/modules \
-    #    jsnshrmn/twlight --version "+ twlight_puppet_version +";"
+    #    /vagrant/puppet/modules/"+ twlight_puppet_version +".tar.gz"
+
+    # Install our twlight puppet module from puppet forge
+    config.vm.provision "shell",
+      inline: twlight_puppet_bin_path +"/puppet module install \
+        "+ twlight_puppet_options +" --target-dir /vagrant/puppet/modules \
+        jsnshrmn/twlight --version "+ twlight_puppet_version +";"
 
     # Run the puppet provisioner
     config.vm.provision "puppet" do |puppet|
       puppet.working_directory = "/vagrant/puppet"
       puppet.hiera_config_path = "puppet/hiera.yaml"
-      puppet.environment = "local" # Obviously a lie, but couldn't get the whole puppet stack to believe otherwise
+      puppet.environment = "local"
       puppet.environment_path = "puppet/environments"
       puppet.module_path = "puppet/modules"
       puppet.binary_path = twlight_puppet_bin_path
