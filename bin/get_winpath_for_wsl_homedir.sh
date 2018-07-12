@@ -7,7 +7,7 @@
 if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
   echo "Path to WSL home directory in Windows 10:"
   ubuntu_homedir=$(powershell.exe -Command '$WSLREGKEY="HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss"; $WSLDEFID=(Get-ItemProperty "$WSLREGKEY").DefaultDistribution; (Get-ItemProperty "$WSLREGKEY\$WSLDEFID").BasePath | Write-Host')
-ubuntu_homedir=${ubuntu_homedir}'\rootfs\'${USER}
+ubuntu_homedir=${ubuntu_homedir}'\rootfs\home\'${USER}
   echo ${ubuntu_homedir}
 else
   echo "Not a WSL environment."
