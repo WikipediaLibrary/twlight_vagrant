@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-twlight_puppet_version = "0.4.0"
+twlight_puppet_version = "0.4.1"
 #twlight_puppet_version = "master"
 
 # Put "--debug " in this string if you want to test the limits of your terminal
