@@ -17,5 +17,9 @@ twlight::params::allowedhosts: "['twlight.vagrant.localdomain']"
 twlight::params::baseurl: "http://${servername}/"
 twlight::params::oauth_provider_url: "https://meta.wikimedia.org/w/index.php"
 
+# The Oauth configuration required to make signin to the site work as expected.
+twlight::params::oauth_key: '51b2324ab1f381f58f581a2997b5324d'
+twlight::params::oauth_secret: '1ceb40f905eb6b532e9b3ab29f45db2c98a17d0f'
+
 classes:
   - twlight

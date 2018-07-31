@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-twlight_puppet_version = "0.4.1"
+twlight_puppet_version = "0.5.1"
 #twlight_puppet_version = "master"
 
 # Put "--debug " in this string if you want to test the limits of your terminal
@@ -43,6 +43,11 @@ Vagrant.configure("2") do |config|
   if Vagrant.has_plugin?("vagrant-vbguest")
     config.vm.synced_folder ".", "/vagrant", type: "virtualbox", mount_options: ['dmode=777', 'fmode=666']
     config.vbguest.auto_update = false
+
+    # Allow the SSH agent to cross the sudo barrier.
+    # Handy if you use an SSH remote and want to run the git pull script (which require root).
+    config.vm.provision "shell",
+      inline: "echo 'Defaults    env_keep+=SSH_AUTH_SOCK' | sudo EDITOR='tee -a' visudo"
 
     # Install puppet because we need it, chrony because its useful in Vagrant,
     # and vim because the author of this Vagrantfile prefers it.
