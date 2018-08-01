@@ -68,6 +68,14 @@ If you have a tarball that you'd like to load on provision, place it
 ./backup/twlight.tar.gz
 ```
 
+Alternatively, scripts are included to create a superuser and generate example data. Before doing anything else, login to the platform as normal, then run
+
+```
+sudo -u www /var/www/html/TWLight/bin/virtualenv_example_data.sh
+```
+
+The account you used to login will be made a superuser, giving you access to the Admin interface. The values in that file can be modified to generate more or less users, partners, and applications, but the file should only be run once.
+
 You'll need to use an SSH SOCKS proxy to access the web interface.
 To do so specify a dynamic tunnel when you vagrant ssh, e.g.
 ```
