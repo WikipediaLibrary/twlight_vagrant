@@ -76,7 +76,7 @@ Vagrant.configure("2") do |config|
   # frontload some vagrant-specific systemd config.
   config.vm.provision "shell",
     inline: "mkdir -p /etc/systemd/system/mariadb.service.d; \
-        printf '[Service]\ProtectHome=false\n' > /etc/systemd/system/mariadb.service.d/vagrant.conf; \
+        printf '[Service]\ProtectHome=false\nTimeoutStartSec=0\n' > /etc/systemd/system/mariadb.service.d/vagrant.conf; \
         systemctl daemon-reload"
 
   ## Handy method for fetching puppet module from github
