@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider "docker" do |d|
     d.build_dir = "."
     d.has_ssh = true
-    d.create_args = ["--privileged", "--cap-add", "SYS_ADMIN", "-v", "/run", "-v", "/tmp", "-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"]
+    d.create_args = ["--cap-add", "SYS_ADMIN", "-v", "/run", "-v", "/tmp", "-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"]
   end
 
   # Ensure systemd is running on all containers.
@@ -76,7 +76,7 @@ Vagrant.configure("2") do |config|
   # frontload some vagrant-specific systemd config.
   config.vm.provision "shell",
     inline: "mkdir -p /etc/systemd/system/mariadb.service.d; \
-        printf '[Service]\nProtectHome=false\nTimeoutStartSec=0\n' > /etc/systemd/system/mariadb.service.d/vagrant.conf; \
+        printf '[Service]\nProtectHome=false\nType=simple\n' > /etc/systemd/system/mariadb.service.d/vagrant.conf; \
         systemctl daemon-reload"
 
   ## Handy method for fetching puppet module from github
