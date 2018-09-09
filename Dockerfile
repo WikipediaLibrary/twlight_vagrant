@@ -5,10 +5,11 @@ ENV DEBIAN_FRONTEND "noninteractive"
 ENV NOTVISIBLE "in users profile"
 
 ADD bin/dockerrun.sh /root/dockerrun.sh
-ADD bin/systemd.sh /root/systemd.sh
+ADD bin/dockerexec.sh /root/dockerexec.sh
 
 RUN /root/dockerrun.sh
 
 STOPSIGNAL SIGRTMIN+3
-CMD ["/usr/sbin/sshd", "-D"]
+
+CMD ["/root/dockerexec.sh", "-D"]
 EXPOSE 22

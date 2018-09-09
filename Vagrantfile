@@ -48,12 +48,6 @@ Vagrant.configure("2") do |config|
     d.create_args = ["--cap-add", "SYS_ADMIN", "-v", "/run", "-v", "/tmp", "-v", "/sys/fs/cgroup:/sys/fs/cgroup:ro"]
   end
 
-  # Ensure systemd is running on all containers.
-  config.vm.provision "shell",
-      inline: "sudo /root/systemd.sh",
-      keep_color: "True",
-      run: "always"
-
   # Allow the SSH agent to cross the sudo barrier.
   # Handy if you use an SSH remote and want to run the git pull script (which require root).
   config.vm.provision "shell",
@@ -72,6 +66,9 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell",
     inline: "ssh-keyscan -t rsa github.com >> /etc/ssh/ssh_known_hosts"
 
+  # Kill the SSHD process we used to bootstrap, and start a proper service.
+  config.vm.provision "shell",
+    inline: "/usr/bin/pkill sshd && /bin/systemctl start ssh"
 
   # frontload some vagrant-specific systemd config.
   config.vm.provision "shell",

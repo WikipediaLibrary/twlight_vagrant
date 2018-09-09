@@ -3,11 +3,10 @@
 echo "export VISIBLE=now" >> /etc/profile
 
 # Install packages.
-# Basic vagrant workflow for faking real hosts needs openssh-server sudo and systemd.
+# Basic vagrant workflow for faking real hosts needs locales openssh-server sudo and systemd.
 # Puppet provisioner needs lsb-release. Puppet apt module needs gnupg for adding encrypted repos.
 # TWLight vagrant shell provisioner expects wget.
-# Ansbile needs python-minimal. @TODO try stripping that back out.
-apt update && apt install -y dialog gnupg lsb-release openssh-server python-minimal sudo systemd wget
+apt update && apt install -y dialog gnupg lsb-release locales openssh-server sudo systemd wget
 
 mkdir -p /var/run/sshd 
 
@@ -26,6 +25,7 @@ rm -f /lib/systemd/system/anaconda.target.wants/*;
 # With these additions that @jsnshrmn found to be problematic, at least on Debian 9.
 rm -f /lib/systemd/system/user\@.service
 rm -r /lib/systemd/system/systemd-tmpfiles-setup.service
+(cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-journald.service ] || rm -f $i; done);
 
 # SSH login fix. Otherwise user is kicked off after login
 sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
