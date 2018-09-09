@@ -29,7 +29,7 @@ Vagrant's (early but generally working) support for Ubuntu via the Windows Subsy
 
  * Install Docker on the Windows side, and enable legacy mode (Expose daemon on tcp://localhost:2375 without TLS)
  * Install exactly the same build of Vagrant in both Windows and Ubuntu.
- * When you clone this repository in Ubuntu, make sure to do so in a location accessible to Windows, such as ``/mnt/c/Users/Public/v`` (``/mnt/c/`` corresponds to ``C:\``). This is required for the vagrant share to work properly.
+ * When you clone this repository in Ubuntu, make sure to do so in a location accessible to Windows, such as ``/mnt/c/Users/Username/v`` (``/mnt/c/`` corresponds to ``C:\``). This is required for the vagrant share to work properly.
  * There are a number of environment variables that should be configured for WSL + Docker + Vagrant to work happily. As a convenience, you may just ``source bin/wsl_docker_activate.sh`` from within the project directory.
  
 The Linux notes apply to the Ubuntu environment. Just download a fixed version of Vagrant (that matches the version you install in Windows) and install using dpkg as described in the instructions. Install any plugins in Ubuntu.
