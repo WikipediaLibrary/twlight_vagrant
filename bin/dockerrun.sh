@@ -8,10 +8,10 @@ echo "export VISIBLE=now" >> /etc/profile
 # TWLight vagrant shell provisioner expects wget.
 apt update && apt install -y dialog gnupg lsb-release locales openssh-server sudo systemd wget
 
-mkdir -p /var/run/sshd 
+# Lie if anyone anyone asks if we booted up with systemd.
+# https://www.freedesktop.org/software/systemd/man/sd_booted.html
+mkdir -p /run/systemd/system
 
-# systemd config.
-mkdir -p /run/systemd
 # Strip out bits that aren't going to work happily in this container. Largely cribbed from:
 # https://developers.redhat.com/blog/2014/05/05/running-systemd-within-docker-container/
 (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done);
@@ -26,6 +26,9 @@ rm -f /lib/systemd/system/anaconda.target.wants/*;
 rm -f /lib/systemd/system/user\@.service
 rm -r /lib/systemd/system/systemd-tmpfiles-setup.service
 (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-journald.service ] || rm -f $i; done);
+
+# Prep us running SSH from a shell.
+mkdir -p /var/run/sshd
 
 # SSH login fix. Otherwise user is kicked off after login
 sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd

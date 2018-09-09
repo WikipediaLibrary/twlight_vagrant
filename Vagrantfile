@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-twlight_puppet_version = "0.5.2"
+twlight_puppet_version = "0.5.3"
 #twlight_puppet_version = "master"
 
 # Put "--debug " in this string if you want to test the limits of your terminal
@@ -23,10 +23,11 @@ Vagrant.configure("2") do |config|
   #else
   #  # Else, throw a Vagrant Error. Cannot successfully startup on Windows without a GitHub SSH Key!
   #  raise Vagrant::Errors::VagrantError, "\n\nERROR: GitHub SSH Key not found at ~/.ssh/github_rsa.\n\n"
-  end
+  #end
 
   # Forward SSH agent from host into Vagrant machine
   config.ssh.forward_agent = true
+  config.ssh.password = "vagrant"
 
   # Our provisioner expects /vagrant.
   config.vm.synced_folder ".", "/vagrant"
@@ -94,22 +95,22 @@ Vagrant.configure("2") do |config|
       jsnshrmn/twlight --version "+ twlight_puppet_version +";"
 
   # Run the puppet provisioner
-  config.vm.provision "puppet" do |puppet|
-    puppet.working_directory = "/vagrant/puppet"
-    puppet.hiera_config_path = "puppet/hiera.yaml"
-    puppet.environment = "local"
-    puppet.environment_path = "puppet/environments"
-    puppet.module_path = "puppet/modules"
-    puppet.binary_path = twlight_puppet_bin_path
-    puppet.options = twlight_puppet_options
+  #config.vm.provision "puppet" do |puppet|
+  #  puppet.working_directory = "/vagrant/puppet"
+  #  puppet.hiera_config_path = "puppet/hiera.yaml"
+  #  puppet.environment = "local"
+  #  puppet.environment_path = "puppet/environments"
+  #  puppet.module_path = "puppet/modules"
+  #  puppet.binary_path = twlight_puppet_bin_path
+  #  puppet.options = twlight_puppet_options
 
-  # Run migration so any imported DB dump will work with current code.
-  config.vm.provision "shell",
-    inline: "sudo su www bash -c '/var/www/html/TWLight/bin/./virtualenv_migrate.sh >>/var/www/html/TWLight/TWLight/logs/update.log 2>&1' || :"
+  ## Run migration so any imported DB dump will work with current code.
+  #config.vm.provision "shell",
+  #  inline: "sudo su www bash -c '/var/www/html/TWLight/bin/./virtualenv_migrate.sh >>/var/www/html/TWLight/TWLight/logs/update.log 2>&1' || :"
 
-  # Allow vagrant user to write to project .git
-  config.vm.provision "shell",
-    inline: "usermod -a -G www vagrant && chmod -R g+w /var/www/html/TWLight"
+  ## Allow vagrant user to write to project .git
+  #config.vm.provision "shell",
+  #  inline: "usermod -a -G www vagrant && chmod -R g+w /var/www/html/TWLight"
 
   end
 end
