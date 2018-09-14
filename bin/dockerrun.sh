@@ -6,7 +6,7 @@ echo "export VISIBLE=now" >> /etc/profile
 # Basic vagrant workflow for faking real hosts needs locales openssh-server sudo and systemd.
 # Puppet provisioner needs lsb-release. Puppet apt module needs gnupg for adding encrypted repos.
 # TWLight vagrant shell provisioner expects wget.
-apt update && apt install -y dialog gnupg lsb-release locales openssh-server sudo systemd wget
+apt update && apt install -y dialog gnupg lsb-release locales locales-all openssh-server sudo systemd wget
 
 # Lie if anyone anyone asks if we booted up with systemd.
 # https://www.freedesktop.org/software/systemd/man/sd_booted.html
