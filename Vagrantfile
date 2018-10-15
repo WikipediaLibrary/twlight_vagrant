@@ -53,6 +53,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell",
       inline: "echo 'Defaults    env_keep+=SSH_AUTH_SOCK' | sudo EDITOR='tee -a' visudo"
 
+  # Allow host side clipboard to work as expected in vim.
+    config.vm.provision "shell",
+      inline: "echo 'set mouse=r' > ~/.vimrc"
+
   # Install puppet because we need it, chrony because its useful in Vagrant,
   # and vim because the author of this Vagrantfile prefers it.
   config.vm.provision "shell",
