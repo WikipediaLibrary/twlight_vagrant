@@ -103,13 +103,13 @@ Vagrant.configure("2") do |config|
     puppet.binary_path = twlight_puppet_bin_path
     puppet.options = twlight_puppet_options
 
-  # Run migration so any imported DB dump will work with current code.
-  config.vm.provision "shell",
-    inline: "sudo su www bash -c '/var/www/html/TWLight/bin/./virtualenv_migrate.sh >>/var/www/html/TWLight/TWLight/logs/update.log 2>&1' || :"
-
   # Allow vagrant user to write to project .git
   config.vm.provision "shell",
     inline: "usermod -a -G www vagrant && chmod -R g+w /var/www/html/TWLight"
+
+  # Run migration so any imported DB dump will work with current code.
+  config.vm.provision "shell",
+    inline: "sudo su www bash -c '/var/www/html/TWLight/bin/./virtualenv_migrate.sh >>/var/www/html/TWLight/TWLight/logs/update.log 2>&1' || :"
 
   end
 end
