@@ -18,6 +18,10 @@ if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
   
   # Let WSL access Windows-side Docker if it's installed.
   if [ -f '/mnt/c/Program Files/Docker Toolbox/docker.exe' ] ; then
+      unset DOCKER_TLS_VERIFY
+      unset DOCKER_HOST
+      unset DOCKER_CERT_PATH
+      unset DOCKER_API_VERSION
       export PATH="$PATH:/mnt/c/Program Files/Docker Toolbox"
       export DOCKER_HOST=tcp://127.0.0.1:2375
       alias docker='docker.exe'
