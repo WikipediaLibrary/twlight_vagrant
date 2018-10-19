@@ -53,10 +53,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell",
       inline: "echo 'Defaults    env_keep+=SSH_AUTH_SOCK' | sudo EDITOR='tee -a' visudo"
 
-  # Allow host side clipboard to work as expected in vim.
-    config.vm.provision "shell",
-      inline: "echo 'set mouse=r' > /etc/vim/vimrc.local"
-
   # Install puppet because we need it, chrony because its useful in Vagrant,
   # and vim because the author of this Vagrantfile prefers it.
   config.vm.provision "shell",
@@ -69,10 +65,6 @@ Vagrant.configure("2") do |config|
   # Add github's host key to our known hosts file
   config.vm.provision "shell",
     inline: "ssh-keyscan -t rsa github.com >> /etc/ssh/ssh_known_hosts"
-
-  # Kill the SSHD process we used to bootstrap, and start a proper service.
-  config.vm.provision "shell",
-    inline: "/usr/bin/pkill sshd && /bin/systemctl start ssh"
 
   # frontload some vagrant-specific systemd config.
   config.vm.provision "shell",

@@ -6,6 +6,8 @@ ENV NOTVISIBLE "in users profile"
 
 ADD bin/dockerrun.sh /root/dockerrun.sh
 ADD bin/dockerexec.sh /root/dockerexec.sh
+ADD etc/.vimrc /root/.vimrc
+ADD etc/.vimrc /etc/skel/.vimrc
 
 RUN /root/dockerrun.sh
 
