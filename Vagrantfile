@@ -35,7 +35,7 @@ Vagrant.configure("2") do |config|
   # We need a little beef if we're pulling in production-scale data
   config.vm.provider :virtualbox do |v|
     # roughly tracking twlight VMs provisioned via wikimedia labs horizon
-    v.box = "bento/debian-8"
+    v.box = "bento/debian-9"
     v.cpus = 4
     v.memory = 4096
     v.linked_clone = true
