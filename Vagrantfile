@@ -57,8 +57,8 @@ Vagrant.configure("2") do |config|
   # and vim because the author of this Vagrantfile prefers it.
   config.vm.provision "shell",
     inline: "wget --quiet --timestamping --directory-prefix=/tmp \
-        https://apt.puppetlabs.com/puppetlabs-release-pc1-jessie.deb && \
-        dpkg -i /tmp/puppetlabs-release-pc1-jessie.deb && \
+        https://apt.puppetlabs.com/puppetlabs-release-pc1-stretch.deb && \
+        dpkg -i /tmp/puppetlabs-release-pc1-stretch.deb && \
         apt update && apt install -y chrony puppet-agent vim"
 
 
@@ -95,6 +95,7 @@ Vagrant.configure("2") do |config|
     puppet.hiera_config_path = "puppet/hiera.yaml"
     puppet.environment = "local"
     puppet.environment_path = "puppet/environments"
+    puppet.environment_variables = {"APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE" => "1" }
     puppet.module_path = "puppet/modules"
     puppet.binary_path = twlight_puppet_bin_path
     puppet.options = twlight_puppet_options
