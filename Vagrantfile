@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-twlight_puppet_version = "0.5.3"
+twlight_puppet_version = "0.5.8"
 
 # Put "--debug " in this string if you want to test the limits of your terminal
 # emulator's buffer.
