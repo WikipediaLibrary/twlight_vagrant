@@ -1,8 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-twlight_puppet_version = "0.5.2"
-#twlight_puppet_version = "master"
+twlight_puppet_version = "0.5.10"
 
 # Put "--debug " in this string if you want to test the limits of your terminal
 # emulator's buffer.
@@ -29,8 +28,7 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
 
   # roughly tracking twlight VMs provisioned via wikimedia labs horizon
-  config.vm.box = "bento/debian-8"
-  #config.vm.box_version = ""
+  config.vm.box = "bento/debian-9"
 
   # We need a little beef if we're pulling in production-scale data
   config.vm.provider :virtualbox do |v|
@@ -53,8 +51,8 @@ Vagrant.configure("2") do |config|
     # and vim because the author of this Vagrantfile prefers it.
     config.vm.provision "shell",
       inline: "wget --quiet --timestamping --directory-prefix=/tmp \
-          https://apt.puppetlabs.com/puppetlabs-release-pc1-jessie.deb && \
-          dpkg -i /tmp/puppetlabs-release-pc1-jessie.deb && \
+          https://apt.puppetlabs.com/puppetlabs-release-pc1-stretch.deb && \
+          dpkg -i /tmp/puppetlabs-release-pc1-stretch.deb && \
           apt update && apt install -y chrony puppet-agent vim"
 
 
@@ -85,6 +83,7 @@ Vagrant.configure("2") do |config|
       puppet.hiera_config_path = "puppet/hiera.yaml"
       puppet.environment = "local"
       puppet.environment_path = "puppet/environments"
+      puppet.environment_variables = {"APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE" => "1" }
       puppet.module_path = "puppet/modules"
       puppet.binary_path = twlight_puppet_bin_path
       puppet.options = twlight_puppet_options
