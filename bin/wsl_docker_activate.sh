@@ -15,9 +15,10 @@ if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
   # may be set.
   here=$(basename $(pwd))
   export VAGRANT_DOTFILE_PATH="~/.vagrant/.${here}"
-  
+
+  # @TODO: make this check less brittle. Currenly only works with default install location.
   # Let WSL access Windows-side Docker if it's installed.
-  if [ -f '/mnt/c/Program Files/Docker Toolbox/docker.exe' ] ; then
+  if [[ -f '/mnt/c/Program Files/Docker/Docker/DockerCli.exe' || -f '/mnt/c/Program Files/Docker Toolbox/docker.exe' ]] ; then
       # Unset minikube variables that might make vagrant angry.
       unset DOCKER_TLS_VERIFY
       unset DOCKER_HOST
@@ -25,9 +26,7 @@ if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
       unset DOCKER_API_VERSION
 
       # Set variables to allow the docker service running in Windows to work in WSL.
-      export PATH="$PATH:/mnt/c/Program Files/Docker Toolbox"
       export DOCKER_HOST=tcp://127.0.0.1:2375
-      alias docker='docker.exe'
       export VAGRANT_DEFAULT_PROVIDER="docker"
   fi
 else
