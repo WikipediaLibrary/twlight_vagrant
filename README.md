@@ -27,12 +27,13 @@ Some third-party endpoint security software, such as Dell Data Protection Encryp
 
 Vagrant's (early but generally working) support for Ubuntu via the Windows Subsystem for Linux is the recommended way to run this enviroment. You should be on Windows 10 Version 1709 or later and perform a store-based Ubuntu installation. See the [Vagrant and Windows Subsystem for Linux instructions](https://www.vagrantup.com/docs/other/wsl.html). Then:
 
- * Install Docker on the Windows side, and enable legacy mode (Expose daemon on tcp://localhost:2375 without TLS)
- * Install exactly the same build of Vagrant in both Windows and Ubuntu.
+ * Install Docker on Windows and enable legacy mode (Expose daemon on tcp://localhost:2375 without TLS)
+ * Install Docker on Ubuntu. You can just use the Ubuntu-provided package, eg. `apt install docker.io`
+ * Install Vagrant on Ubuntu using dpkg as described in the Vagrant instructions. If you already have Vagrant on Windows, you'll need to keep the two at exactly the same build version.
  * When you clone this repository in Ubuntu, make sure to do so in a location accessible to Windows, such as ``/mnt/c/Users/Username/v`` (``/mnt/c/`` corresponds to ``C:\``). This is required for the vagrant share to work properly.
  * There are a number of environment variables that should be configured for WSL + Docker + Vagrant to work happily. As a convenience, you may just ``source bin/wsl_docker_activate.sh`` from within the project directory.
  
-The Linux notes apply to the Ubuntu environment. Just download a fixed version of Vagrant (that matches the version you install in Windows) and install using dpkg as described in the instructions. Install any plugins in Ubuntu.
+The Linux notes apply to the Ubuntu environment.
 
 ## Usage
 
@@ -44,7 +45,7 @@ You might need to configure some of the settings for the [puppet module](https:/
 ```
 and configure any parameters you'd like to override, such as the git repository or revision. See the [parameters manifest in the puppet module](https://github.com/WikipediaLibrary/twlight_puppet/blob/master/manifests/params.pp).
 
-If you have a tarball that you'd like to load on provision, place it
+If you have a TWLight backup tarball that you'd like to load on provision, place it
 
 ```
 ./backup/twlight.tar.gz
