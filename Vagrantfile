@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-twlight_puppet_version = "0.5.12"
+twlight_puppet_version = "0.5.13"
 
 # Put "--debug " in this string if you want to test the limits of your terminal
 # emulator's buffer.
@@ -100,13 +100,8 @@ Vagrant.configure("2") do |config|
     puppet.binary_path = twlight_puppet_bin_path
     puppet.options = twlight_puppet_options
 
-  # Allow vagrant user to write to project .git
-  config.vm.provision "shell",
-    inline: "usermod -a -G www vagrant && chmod -R g+w /var/www/html/TWLight"
-
   # Run migration so any imported DB dump will work with current code.
   config.vm.provision "shell",
-    inline: "sudo su www bash -c '/var/www/html/TWLight/bin/./virtualenv_migrate.sh >>/var/www/html/TWLight/TWLight/logs/update.log 2>&1' || :"
-
+    inline: "sudo su vagrant bash -c '/var/www/html/TWLight/bin/./virtualenv_migrate.sh >>/var/www/html/TWLight/TWLight/logs/update.log 2>&1' || :"
   end
 end
