@@ -54,7 +54,7 @@ If you have a TWLight backup tarball that you'd like to load on provision, place
 Alternatively, scripts are included to create a superuser and generate example data. Before doing anything else, login to the platform as normal, then run
 
 ```
-sudo -u www /var/www/html/TWLight/bin/virtualenv_example_data.sh
+/var/www/html/TWLight/bin/virtualenv_example_data.sh
 ```
 
 The account you used to login will be made a superuser, giving you access to the Admin interface. The values in that file can be modified to generate more or less users, partners, and applications, but the file should only be run once.
@@ -73,5 +73,5 @@ You can now work on the running app inside Vagrant and view the changes in your 
 As you are making local changes, make sure to take advantage of the included test suite. To do so, run the following command within the vagrant machine:
 
 ```
-sudo su www /var/www/html/TWLight/bin/virtualenv_test.sh
+/var/www/html/TWLight/bin/virtualenv_test.sh
 ```
