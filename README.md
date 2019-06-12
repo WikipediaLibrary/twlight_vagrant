@@ -1,4 +1,5 @@
-# twlight_vagrant
+# twlight_vagrant (Deprecated)
+ The [Library Card Platform for The Wikipedia Library](https://github.com/WikipediaLibrary/TWLight) now uses Docker and doesn't require a separate project for its development environment.
 
 ## Overview
 
