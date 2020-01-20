@@ -11,7 +11,7 @@ Host default
   UserKnownHostsFile /dev/null
   StrictHostKeyChecking no
   PasswordAuthentication no
-  IdentityFile /home/$USER/Projects/vagrant/twlight_vagrant/.vagrant/machines/default/virtualbox/private_key
+  IdentityFile /home/$USER/.vagrant/.twlight_vagrant/machines/twlight/docker/private_key
   IdentitiesOnly yes
   LogLevel FATAL
   ForwardAgent yes
@@ -38,13 +38,13 @@ where $USER is your linux username and $somevalue is not consistent across insta
 To that path, add the path to the private key for the TWLight Vagrant machine that gets created upon "vagrant up." For example
 
 ```
-Projects\vagrant\twlight_vagrant\.vagrant\machines\default\virtualbox\private_key
+.vagrant\.twlight_vagrant\machines\twlight\docker\private_key
 ```
 
 In this case, the full path to your TWLight Vagrant machine's IdentityFile would be something like:
 
 ```
-%localappdata%\Packages\CanonicalGroupLimited.UbuntuonWindows_$somevalue\LocalState\rootfs\home\$USER\Projects\vagrant\twlight_vagrant\.vagrant\machines\default\virtualbox\private_key
+%localappdata%\Packages\CanonicalGroupLimited.UbuntuonWindows_$somevalue\LocalState\rootfs\home\$USER\.vagrant\.twlight_vagrant\machines\twlight\docker\private_key
 ```
 
 ## FileZilla example (Linux, MacOS, or Windows)
